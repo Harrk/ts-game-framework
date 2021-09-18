@@ -2,7 +2,7 @@ import constants from "../types/constants";
 import { GameConfig } from "../types/game-config";
 import { Renderer2D } from "../types/renderer/renderer-2d";
 import { RendererInterface } from "../types/renderer/renderer-interface";
-import { Entity } from "./entity";
+import { Scene } from "./scene";
 
 export class Game {
     is_running: boolean = false;
@@ -10,8 +10,8 @@ export class Game {
     timer: number;
     canvas: HTMLCanvasElement;
     renderer: RendererInterface;
-    entities: Entity[] = [];
     config: GameConfig;
+    scenes: Scene[] = [];
 
     constructor(config: GameConfig) {
         this.config = config;
@@ -90,12 +90,16 @@ export class Game {
     }
 
     update(): void {
-        this.entities.forEach((ent) => ent.update());
+        this.scenes
+            .filter((scene) => scene.is_running)
+            .forEach((scene) => scene.update());
     }
 
     render(): void {
         this.renderer.clear();
-        
-        this.entities.forEach((ent) => ent.render(this.renderer));
+
+        this.scenes
+            .filter((scene) => scene.is_running)
+            .forEach((scene) => scene.render(this.renderer));
     }
 }
