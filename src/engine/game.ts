@@ -1,23 +1,25 @@
 import constants from "../types/constants";
 import { GameConfig } from "../types/game-config";
+import { Renderer2D } from "../types/renderer/renderer-2d";
+import { RendererInterface } from "../types/renderer/renderer-interface";
 import { Entity } from "./entity";
 
 export class Game {
     is_running: boolean = false;
     target_fps: number = 60;
-    timer;
+    timer: number;
     canvas: HTMLCanvasElement;
-    context;
+    renderer: RendererInterface;
     entities: Entity[] = [];
     config: GameConfig;
 
-    constructor(config) {
+    constructor(config: GameConfig) {
         this.config = config;
 
         this.createCanvas();
-        this.initContext();
 
-        this.entities.push(new Entity());
+        // Boots
+        this.bootRenderer();
     }
 
     private createCanvas() {
@@ -29,32 +31,52 @@ export class Game {
         document.body.appendChild(this.canvas);
     }
 
-    private initContext() {
+    /**
+     * Boot up a renderer based on the given config.
+     * 
+     * AUTO: Will attempt to use webgl before falling over on 2d
+     * WEBGL: Use the webgl renderer
+     * WEBGL2: Use the webgl2 renderer
+     * 2D: Use the 2d renderer
+     */
+    private bootRenderer() {
         if (this.config.type === constants.CONTEXT_AUTO) {
-            this.context = this.canvas.getContext('webgl')
-                || this.canvas.getContext('experimental-webgl')
-                || this.canvas.getContext('2d'); 
+            // Todo: Not yet supported
+            // if (this.canvas.getContext('webgl')) {
+            //     this.renderer = new Renderer2D(this, this.canvas.getContext('webgl'));
+            // }
+            
+            // if (this.canvas.getContext('experimental-webgl')) {
+            //     this.renderer = new Renderer2D(this, this.canvas.getContext('experimental-webg'));
+            // }
+            
+            if (this.canvas.getContext('2d')) {
+                this.renderer = new Renderer2D(this, this.canvas.getContext('2d'));
+            }
         }
 
         if (this.config.type === constants.CONTEXT_CANVAS) {
-            this.context = this.canvas.getContext('2d');
+            this.renderer = new Renderer2D(this, this.canvas.getContext('2d'));
         }
 
         if (this.config.type === constants.CONTEXT_WEBGL) {
-            this.context = this.canvas.getContext('webgl');
+            // Todo: Not yet supported
+            // this.renderer = new Renderer2D(this, this.canvas.getContext('webgl'));
         }
 
         if (this.config.type === constants.CONTEXT_WEBGL2) {
-            this.context = this.canvas.getContext('webgl2');
+            // Todo: Not yet supported
+            // this.renderer = new Renderer2D(this, this.canvas.getContext('webgl2'));
         }
 
-        // throw new Error('Context type not supported.');
+        if (! this.renderer) {
+            throw new Error('Renderer not supported');
+        }
     }
 
     run(): void {
         this.timer = setTimeout(() => {
             this.update();
-            this.clear();
             this.render();
     
             requestAnimationFrame(() => this.run());
@@ -71,12 +93,9 @@ export class Game {
         this.entities.forEach((ent) => ent.update());
     }
 
-    clear(): void {
-        // this.context.clearColor(1.0, 1.0, 0.0, 1.0); // WEBGL
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-
     render(): void {
-        this.entities.forEach((ent) => ent.render(this.context));
+        this.renderer.clear();
+        
+        this.entities.forEach((ent) => ent.render(this.renderer));
     }
 }

@@ -1,10 +1,11 @@
+import { RendererInterface } from "../types/renderer/renderer-interface";
 import { Vector2 } from "../types/vector2";
 
 export class Entity {
     position: Vector2;
 
-    constructor() {
-        this.position = new Vector2();
+    constructor(position: Vector2 = new Vector2()) {
+        this.position = position;
     }
 
     update() {
@@ -15,8 +16,7 @@ export class Entity {
         }
     }
 
-    render(ctx) {
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(this.position.x, this.position.y, 10, 10);
+    render(renderer: RendererInterface) {
+        renderer.drawRect(this.position.x, this.position.y, 16, 16, "red");
     }
 }
