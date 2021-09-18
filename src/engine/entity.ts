@@ -1,3 +1,4 @@
+import { Rect } from "../types/rect";
 import { RendererInterface } from "../types/renderer/renderer-interface";
 import { Vector2 } from "../types/vector2";
 
@@ -17,6 +18,8 @@ export class Entity {
     }
 
     render(renderer: RendererInterface) {
-        renderer.drawRect(this.position.x, this.position.y, 16, 16, "red");
+        renderer.drawRect(new Rect(
+            this.position.x, this.position.y, 16, 16
+        ), "red");
     }
 }

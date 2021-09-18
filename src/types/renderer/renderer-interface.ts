@@ -1,5 +1,7 @@
+import { Rect } from "../rect";
+
 export interface RendererInterface {
     clear(): void;
 
-    drawRect(x: number, y: number, width: number, height: number, colour?: string): void;
+    drawRect(rect: Rect, colour?: string): void;
 }

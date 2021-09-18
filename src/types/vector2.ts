@@ -1,9 +1,7 @@
-export class Vector2 {
-    x: number = 0;
-    y: number = 0;
+import { Vector3 } from "./vector3";
 
+export class Vector2 extends Vector3 {
     constructor(x: number = 0, y: number = 0) {
-        this.x = x;
-        this.y = y;
+        super(x, y, 0);
     }
 }
