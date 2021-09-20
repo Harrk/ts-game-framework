@@ -1,6 +1,5 @@
 import { Entity } from "../../engine/entity";
 import { Game } from "../../engine/game";
-import { KeyCode } from "../../engine/input";
 import { Scene } from "../../engine/scene";
 import constants from "../../types/constants";
 import { GameConfig } from "../../types/game-config";
