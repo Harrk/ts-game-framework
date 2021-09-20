@@ -2,6 +2,7 @@ import constants from "../types/constants";
 import { GameConfig } from "../types/game-config";
 import { Renderer2D } from "../types/renderer/renderer-2d";
 import { RendererInterface } from "../types/renderer/renderer-interface";
+import { Input } from "./input";
 import { Scene } from "./scene";
 
 export class Game {
@@ -12,6 +13,7 @@ export class Game {
     renderer: RendererInterface;
     config: GameConfig;
     scenes: Scene[] = [];
+    input: Input;
 
     constructor(config: GameConfig) {
         this.config = config;
@@ -20,6 +22,7 @@ export class Game {
 
         // Boots
         this.bootRenderer();
+        this.bootInput();
     }
 
     private createCanvas() {
@@ -74,11 +77,14 @@ export class Game {
         }
     }
 
+    private bootInput() {
+        this.input = new Input(this);
+    }
+
     run(): void {
         this.timer = setTimeout(() => {
             this.update();
             this.render();
-    
             requestAnimationFrame(() => this.run());
         }, 1000 / this.target_fps);
     }
@@ -90,6 +96,10 @@ export class Game {
     }
 
     update(): void {
+        // Update systems first
+        this.input.update();
+
+        // Update scenes and their entities
         this.scenes
             .filter((scene) => scene.is_running)
             .forEach((scene) => scene.update());
