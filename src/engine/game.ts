@@ -27,11 +27,16 @@ export class Game {
 
     private createCanvas() {
         this.canvas = document.createElement('canvas');
-        this.canvas.setAttribute('style', `background-color: white; display:block; margin: auto; width: ${ this.config.width };`);
+        this.canvas.setAttribute('style', `background-color: white;`);
         this.canvas.setAttribute('width', String(this.config.width));
         this.canvas.setAttribute('height', String(this.config.height));
 
         document.body.appendChild(this.canvas);
+
+        let textFallback = document.createElement('p')
+        textFallback.textContent = 'Your browser does not support HTMl5 canvas.';
+
+        this.canvas.appendChild(textFallback);
     }
 
     /**
