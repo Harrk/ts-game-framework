@@ -17,60 +17,40 @@ let config = new GameConfig(
 // Initalise the game and start the loop
 let game = new Game(config);
 
-class Square1 extends Entity {
+class Wall extends Entity {
     update() {
-        this.position.x++;
 
-        if (this.position.x > 300) {
-            this.position.x = 0;
-        }
     }
 
     render(renderer: RendererInterface) {
         renderer.drawRect(new Rect(
-            this.position.x, this.position.y, 16, 16
-        ), "red");
+            this.position.x, this.position.y, this.collision_rect.width, this.collision_rect.height
+        ), "gray");
     }
 }
 
-class Square2 extends Entity {
-    update() {
-        this.position.y++;
+class SquarePlayer extends Entity {
+    speed: number = 2;
 
-        if (this.position.y > 300) {
-            this.position.y = 0;
+    update() {
+        if (this.isColliding) {
+            return;
+        }
+
+        let move = new Vector2(
+            (Number(game.input.isKeyPressed("D")) - Number(game.input.isKeyPressed("A"))) * this.speed,
+            (Number(game.input.isKeyPressed("S")) - Number(game.input.isKeyPressed("W"))) * this.speed
+        );
+
+        if (! this.test_collision(this.position.add(move))) {
+            this.position.x += move.x;
+            this.position.y += move.y;
         }
     }
 
     render(renderer: RendererInterface) {
         renderer.drawRect(new Rect(
-            this.position.x, this.position.y, 16, 16
-        ), "blue");
-    }
-}
-
-class Square3 extends Entity {
-    update() {
-        if (game.input.isKeyPressed("W")) {
-            this.position.y--;
-        }
-
-        if (game.input.isKeyPressed("A")) {
-            this.position.x--;
-        }
-
-        if (game.input.isKeyPressed("S")) {
-            this.position.y++;
-        }
-
-        if (game.input.isKeyPressed("D")) {
-            this.position.x++;
-        }
-    }
-
-    render(renderer: RendererInterface) {
-        renderer.drawRect(new Rect(
-            this.position.x, this.position.y, 32, 32
+            this.collision_rect.x, this.collision_rect.y, this.collision_rect.width, this.collision_rect.height
         ), "orange");
     }
 }
@@ -78,9 +58,10 @@ class Square3 extends Entity {
 export default () => {
     let testScene = new Scene(true);
 
-    testScene.entities.push(new Square1());
-    testScene.entities.push(new Square2());
-    testScene.entities.push(new Square3(new Vector2(200, 200)));
+    testScene.addEntity(new Wall(new Vector2(100, 50), new Rect(0, 0, 512, 16)));
+    testScene.addEntity(new Wall(new Vector2(100, 66), new Rect(0, 0, 16, 256)));
+
+    testScene.addEntity(new SquarePlayer(new Vector2(200, 200), new Rect(0, 0, 32, 32)));
     game.scenes.push(testScene);
 
     game.run();

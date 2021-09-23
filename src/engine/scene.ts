@@ -18,10 +18,17 @@ export class Scene {
     }
 
     update() {
+        this.entities.forEach((ent) => ent.preUpdate());
         this.entities.forEach((ent) => ent.update());
+        this.entities.forEach((ent) => ent.postUpdate());
     }
 
     render(renderer: RendererInterface) {
         this.entities.forEach((ent) => ent.render(renderer));
+    }
+
+    addEntity(entity: Entity) {
+        entity.scene = this;
+        this.entities.push(entity);
     }
 }

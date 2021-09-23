@@ -4,4 +4,11 @@ export class Vector2 extends Vector3 {
     constructor(x: number = 0, y: number = 0) {
         super(x, y, 0);
     }
+
+    add(vector: Vector2): Vector2 {
+        return new Vector2(
+            this.x + vector.x,
+            this.y + vector.y
+        );
+    }
 }
