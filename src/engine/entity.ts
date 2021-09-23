@@ -39,7 +39,7 @@ export abstract class Entity {
         return this.scene.entities
             .filter((ent) => ent.collision_rect 
                 && ent !== this
-                && ent.collision_rect.overlaps(test_rect)
+                && test_rect.overlaps(ent.collision_rect)
             )
             .length > 0;
     }

@@ -19,10 +19,10 @@ export class Rect {
     }
 
     overlaps(rect: Rect): boolean {
-        return this.pointCollides(rect.topLeft)
-            || this.pointCollides(rect.topRight)
-            || this.pointCollides(rect.bottomLeft)
-            || this.pointCollides(rect.bottomRight);
+        return this.right > rect.left
+            && this.left < rect.right
+            && this.bottom > rect.top
+            && this.top < rect.bottom;
     }
 
     pointCollides(point: Vector2): boolean {
