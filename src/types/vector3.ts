@@ -8,4 +8,12 @@ export class Vector3 {
         this.y = y;
         this.z = z;
     }
+
+    add(vector: Vector3): Vector3 {
+        return new Vector3(
+            this.x + vector.x,
+            this.y + vector.y,
+            this.z + vector.z
+        );
+    }
 }
