@@ -3,7 +3,7 @@ export class Vector3 {
     public static readonly AXIS_Y= 1;
     public static readonly AXIS_Z= 2;
 
-    public static readonly ZERO= new Vector3();
+    public static readonly ZERO= new Vector3(0, 0, 0);
     public static readonly ONE= new Vector3(1, 1, 1);
     public static readonly UP= new Vector3(0, 1, 0);
     public static readonly DOWN= new Vector3(0, -1, 0);
@@ -31,8 +31,12 @@ export class Vector3 {
      * @param vector - vector to check equality against.
      * @returns {boolean} Equality of this and vector.
      */
-    equals(vector: Vector3) {
-        return (this.x == vector.x && this.y == vector.y && this.z == vector.z);
+    equals(vector: Vector3): boolean {
+        let diff= this.sub(vector).abs();
+        let e= Number.EPSILON;
+        return (
+            diff.x < e && diff.y < e && diff.z < e
+        );
     }
 
     /**
@@ -133,7 +137,7 @@ export class Vector3 {
      * @returns Vector t amount between this and end point.
      */
     lerp(to: Vector3, t: number): Vector3{
-        var delta= this.sub(to);
+        var delta= to.sub(this);
         return this.add(delta.scale(t));
     }
 
@@ -144,7 +148,7 @@ export class Vector3 {
      * @returns vector stepped towards end point.
      */
     move_towards(vector: Vector3, step: number): Vector3{
-        var delta= this.sub(vector);
+        var delta= vector.sub(this);
         if (delta.length <= step) return new Vector3(vector.x, vector.y, vector.z);
         return this.add(delta.normalize().scale(step));
     }
@@ -264,6 +268,7 @@ export class Vector3 {
      * @returns rotated vector.
      */
     rotate(phi: number, axis: number= Vector3.AXIS_Z): Vector3{
+        phi= phi % Math.PI*2;
         let cos= Math.cos(phi);
         let sin= Math.sin(phi);
         if (axis == Vector3.AXIS_X){
