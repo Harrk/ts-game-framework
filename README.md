@@ -20,8 +20,9 @@ yarn run dev
 yarn run build
 ```
 
-Check code changes follows the styleguide:
 **Code Linter**
+
+Check code changes follows the styleguide:
 ```bash
 yarn lint
 ```
