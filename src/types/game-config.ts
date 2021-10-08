@@ -1,4 +1,4 @@
-import constants from "./constants";
+import constants from './constants';
 
 export class GameConfig {
     type = constants.CONTEXT_AUTO;

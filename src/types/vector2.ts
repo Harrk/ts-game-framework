@@ -1,4 +1,4 @@
-import { Vector3 } from "./vector3";
+import { Vector3 } from './vector3';
 
 export class Vector2 extends Vector3 {
     constructor(x: number = 0, y: number = 0) {

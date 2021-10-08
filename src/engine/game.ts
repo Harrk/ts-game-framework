@@ -1,9 +1,9 @@
-import constants from "../types/constants";
-import { GameConfig } from "../types/game-config";
-import { Renderer2D } from "../types/renderer/renderer-2d";
-import { RendererInterface } from "../types/renderer/renderer-interface";
-import { Input } from "./input";
-import { Scene } from "./scene";
+import constants from '../types/constants';
+import { GameConfig } from '../types/game-config';
+import { Renderer2D } from '../types/renderer/renderer-2d';
+import { RendererInterface } from '../types/renderer/renderer-interface';
+import { Input } from './input';
+import { Scene } from './scene';
 
 export class Game {
     is_running: boolean = false;
@@ -27,13 +27,13 @@ export class Game {
 
     private createCanvas() {
         this.canvas = document.createElement('canvas');
-        this.canvas.setAttribute('style', `background-color: white;`);
+        this.canvas.setAttribute('style', 'background-color: white;');
         this.canvas.setAttribute('width', String(this.config.width));
         this.canvas.setAttribute('height', String(this.config.height));
 
         document.body.appendChild(this.canvas);
 
-        let textFallback = document.createElement('p')
+        const textFallback = document.createElement('p');
         textFallback.textContent = 'Your browser does not support HTMl5 canvas.';
 
         this.canvas.appendChild(textFallback);
@@ -41,7 +41,7 @@ export class Game {
 
     /**
      * Boot up a renderer based on the given config.
-     * 
+     *
      * AUTO: Will attempt to use webgl before falling over on 2d
      * WEBGL: Use the webgl renderer
      * WEBGL2: Use the webgl2 renderer
@@ -53,11 +53,11 @@ export class Game {
             // if (this.canvas.getContext('webgl')) {
             //     this.renderer = new Renderer2D(this, this.canvas.getContext('webgl'));
             // }
-            
+
             // if (this.canvas.getContext('experimental-webgl')) {
             //     this.renderer = new Renderer2D(this, this.canvas.getContext('experimental-webg'));
             // }
-            
+
             if (this.canvas.getContext('2d')) {
                 this.renderer = new Renderer2D(this, this.canvas.getContext('2d'));
             }
@@ -77,7 +77,7 @@ export class Game {
             // this.renderer = new Renderer2D(this, this.canvas.getContext('webgl2'));
         }
 
-        if (! this.renderer) {
+        if (!this.renderer) {
             throw new Error('Renderer not supported');
         }
     }

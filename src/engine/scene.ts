@@ -1,5 +1,5 @@
-import { RendererInterface } from "../types/renderer/renderer-interface";
-import { Entity } from "./entity";
+import { RendererInterface } from '../types/renderer/renderer-interface';
+import { Entity } from './entity';
 
 export class Scene {
     is_running: boolean = false;
@@ -8,7 +8,7 @@ export class Scene {
     constructor(is_running: boolean = false) {
         this.is_running = is_running;
     }
-    
+
     start() {
         this.is_running = false;
     }
