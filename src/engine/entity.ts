@@ -44,15 +44,37 @@ export abstract class Entity {
             .length > 0;
     }
 
+    move_and_collide(position: Vector2) {
+        if (! this.test_collision(this.position.add(position))) {
+            this.position = this.position.add(position);
+        }
+    }
+
+    move_and_slide(position: Vector2) {
+        let xVec = this.position.add(new Vector2(position.x , 0));
+        if (! this.test_collision(xVec)) {
+            this.position = xVec;
+        }
+
+        let yVec = this.position.add(new Vector2(0 , position.y));
+        if (! this.test_collision(yVec)) {
+            this.position = yVec;
+        }
+    }
+
     preUpdate() {
 
     }
 
-    abstract update();
+    update() {
+        // OVeride
+    }
 
     postUpdate() {
         this.updateCollisionMask();
     }
 
-    abstract render(renderer: RendererInterface);
+    render(renderer: RendererInterface) {
+        // OVeride
+    }
 }
