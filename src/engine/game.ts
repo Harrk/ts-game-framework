@@ -24,7 +24,7 @@ export class Game {
 
     public getSystem<T extends SystemInterface>(system: String): T {
         return this.systems.find((sys) => {
-            return sys.constructor.name === system
+            return sys.name === system
         }) as T;
     }
 

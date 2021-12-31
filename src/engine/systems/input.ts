@@ -4,6 +4,7 @@ export class Input implements SystemInterface {
     keys_pressed: string[] = [];
     keys_up: string[] = [];
     keys_down: string[] = [];
+    name: string = "Input";
 
     handlers = {
         keyUp: null,

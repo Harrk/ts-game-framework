@@ -2,7 +2,6 @@ import { Rect } from '../types/rect';
 import { RendererInterface } from '../types/renderer/renderer-interface';
 import { Vector2 } from '../types/vector2';
 import { Scene } from './scene';
-import { Input } from './systems/input';
 
 export abstract class Entity {
     position: Vector2;
@@ -15,7 +14,7 @@ export abstract class Entity {
     }
 
     onReady() {
-        
+
     }
 
     updateCollisionMask() {
@@ -77,7 +76,7 @@ export abstract class Entity {
         this.updateCollisionMask();
     }
 
-    render(renderer: RendererInterface) {
+    render(_renderer: RendererInterface) {
         // OVeride
     }
 }

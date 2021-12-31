@@ -8,6 +8,7 @@ export class Renderer implements SystemInterface {
     canvas: HTMLCanvasElement;
     renderer: RendererInterface;
     game: Game;
+    name: string = "Renderer";
 
     constructor(game: Game) {
         this.game = game;
