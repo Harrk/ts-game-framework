@@ -2,6 +2,7 @@ import { Rect } from '../types/rect';
 import { RendererInterface } from '../types/renderer/renderer-interface';
 import { Vector2 } from '../types/vector2';
 import { Scene } from './scene';
+import { Input } from './systems/input';
 
 export abstract class Entity {
     position: Vector2;
@@ -13,13 +14,17 @@ export abstract class Entity {
         this.collision_rect = collision_rect;
     }
 
+    onReady() {
+        
+    }
+
     updateCollisionMask() {
         if (this.collision_rect) {
             this.collision_rect.setPosition(this.position);
         }
     }
 
-    get isColliding(): boolean {
+    get is_colliding(): boolean {
         if (!this.collision_rect) {
             return false;
         }
@@ -28,11 +33,10 @@ export abstract class Entity {
             .filter((ent) => ent.collision_rect &&
                 ent !== this &&
                 this.collision_rect.overlaps(ent.collision_rect)
-            )
-            .length > 0;
+            ).length > 0;
     }
 
-    test_collision(position: Vector2): boolean {
+    testCollision(position: Vector2): boolean {
         const test_rect: Rect = this.collision_rect.clone();
         test_rect.setPosition(position);
 
@@ -40,24 +44,23 @@ export abstract class Entity {
             .filter((ent) => ent.collision_rect &&
                 ent !== this &&
                 test_rect.overlaps(ent.collision_rect)
-            )
-            .length > 0;
+            ).length > 0;
     }
 
-    move_and_collide(position: Vector2) {
-        if (! this.test_collision(this.position.add(position))) {
+    moveAndCollide(position: Vector2) {
+        if (! this.testCollision(this.position.add(position))) {
             this.position = this.position.add(position);
         }
     }
 
-    move_and_slide(position: Vector2) {
+    moveAndSlide(position: Vector2) {
         let xVec = this.position.add(new Vector2(position.x , 0));
-        if (! this.test_collision(xVec)) {
+        if (! this.testCollision(xVec)) {
             this.position = xVec;
         }
 
         let yVec = this.position.add(new Vector2(0 , position.y));
-        if (! this.test_collision(yVec)) {
+        if (! this.testCollision(yVec)) {
             this.position = yVec;
         }
     }

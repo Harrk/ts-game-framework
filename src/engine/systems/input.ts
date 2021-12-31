@@ -1,7 +1,6 @@
-import { Game } from './game';
+import { SystemInterface } from "./systemInterface";
 
-export class Input {
-    game: Game;
+export class Input implements SystemInterface {
     keys_pressed: string[] = [];
     keys_up: string[] = [];
     keys_down: string[] = [];
@@ -12,9 +11,7 @@ export class Input {
         keyPressed: null
     };
 
-    constructor(game: Game) {
-        this.game = game;
-
+    constructor() {
         // Define callbacks for the events in a way that retains `this` scope
         this.handlers.keyUp = (event: KeyboardEvent) => { this.handleKeyUp(event); };
         this.handlers.keyDown = (event: KeyboardEvent) => { this.handleKeyDown(event); };
@@ -25,15 +22,19 @@ export class Input {
         window.addEventListener('keypress', this.handlers.keyPressed, false);
     }
 
+    update(): void {
+        this.keys_up = [];
+    }
+
+    postUpdate(): void {
+        
+    }
+
     destroy() {
         // Destruct event listeners
         window.removeEventListener('keyup', this.handlers.keyUp);
         window.removeEventListener('keydown', this.handlers.keyDown);
         window.removeEventListener('keypress', this.handlers.keyPressed);
-    }
-
-    update() {
-        this.keys_up = [];
     }
 
     handleKeyUp(input_event: KeyboardEvent) {

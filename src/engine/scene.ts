@@ -30,5 +30,7 @@ export class Scene {
     addEntity(entity: Entity) {
         entity.scene = this;
         this.entities.push(entity);
+
+        entity.onReady();
     }
 }

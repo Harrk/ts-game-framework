@@ -1,6 +1,7 @@
 import { Entity } from '../../engine/entity';
 import { Game } from '../../engine/game';
 import { Scene } from '../../engine/scene';
+import { Input } from '../../engine/systems/input';
 import constants from '../../types/constants';
 import { GameConfig } from '../../types/game-config';
 import { Rect } from '../../types/rect';
@@ -28,11 +29,16 @@ class Wall extends Entity {
 class SquarePlayer extends Entity {
     speed: number = 2;
     velocity: Vector2 = new Vector2();
+    input: Input;
+
+    onReady() {
+        this.input = game.getSystem<Input>("Input");
+    }
 
     update() {
         const move = new Vector2(
-            Number(game.input.isKeyPressed('D')) - Number(game.input.isKeyPressed('A')),
-            Number(game.input.isKeyPressed('S')) - Number(game.input.isKeyPressed('W'))
+            Number(this.input.isKeyPressed('D')) - Number(this.input.isKeyPressed('A')),
+            Number(this.input.isKeyPressed('S')) - Number(this.input.isKeyPressed('W'))
         );
 
         this.velocity = new Vector2(
@@ -40,7 +46,7 @@ class SquarePlayer extends Entity {
             move.y * this.speed
         );
 
-        this.move_and_slide(this.velocity);
+        this.moveAndSlide(this.velocity);
     }
 
     render(renderer: RendererInterface) {
