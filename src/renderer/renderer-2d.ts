@@ -1,4 +1,4 @@
-import { Rect } from '../rect';
+import { Rect } from '../types/rect';
 import { RendererInterface } from './renderer-interface';
 
 export class Renderer2D implements RendererInterface {

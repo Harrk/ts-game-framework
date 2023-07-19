@@ -1,6 +1,6 @@
 import { Entity } from "../../../engine/entity";
 import { Rect } from "../../../types/rect";
-import { RendererInterface } from "../../../types/renderer/renderer-interface";
+import { RendererInterface } from "../../../renderer/renderer-interface";
 
 export class Wall extends Entity { 
     render(renderer: RendererInterface) {

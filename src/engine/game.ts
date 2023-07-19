@@ -5,7 +5,7 @@ import { Renderer } from './systems/renderer';
 import { SystemInterface } from './systems/systemInterface';
 
 export class Game {
-    target_fps: number = 60;
+    target_fps: number = 100;
     timer: number;
     config: GameConfig;
     scenes: Scene[] = [];

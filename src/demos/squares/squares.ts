@@ -5,7 +5,7 @@ import { MainScene } from './scenes/mainScene';
 
 // Define the default game configs
 const config = new GameConfig(
-    constants.CONTEXT_CANVAS,
+    constants.CONTEXT_WEBGL2,
     640,
     360
 );

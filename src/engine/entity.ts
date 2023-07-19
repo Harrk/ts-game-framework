@@ -1,5 +1,5 @@
 import { Rect } from '../types/rect';
-import { RendererInterface } from '../types/renderer/renderer-interface';
+import { RendererInterface } from '../renderer/renderer-interface';
 import { Vector2 } from '../types/vector2';
 import { Scene } from './scene';
 

@@ -1,8 +1,9 @@
-import { Renderer2D } from "../../types/renderer/renderer-2d";
-import { RendererInterface } from "../../types/renderer/renderer-interface";
+import { Renderer2D } from "../../renderer/renderer-2d";
+import { RendererInterface } from "../../renderer/renderer-interface";
 import { SystemInterface } from "./systemInterface";
 import constants from '../../types/constants';
 import { Game } from "../game";
+import { RendererWebGl } from "../../renderer/renderer-webgl";
 
 export class Renderer implements SystemInterface {
     canvas: HTMLCanvasElement;
@@ -65,8 +66,7 @@ export class Renderer implements SystemInterface {
         }
 
         if (this.game.config.type === constants.CONTEXT_WEBGL2) {
-            // Todo: Not yet supported
-            // this.renderer = new Renderer2D(this.canvas.getContext('webgl2'));
+            this.renderer = new RendererWebGl(this.canvas.getContext('webgl2'));
         }
 
         if (! this.renderer) {

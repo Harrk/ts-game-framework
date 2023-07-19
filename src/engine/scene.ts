@@ -1,4 +1,4 @@
-import { RendererInterface } from '../types/renderer/renderer-interface';
+import { RendererInterface } from '../renderer/renderer-interface';
 import { Entity } from './entity';
 
 export class Scene {
