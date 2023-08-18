@@ -1,29 +1,29 @@
 export class Vector3 {
-    public static readonly AXIS_X= 0;
-    public static readonly AXIS_Y= 1;
-    public static readonly AXIS_Z= 2;
+    public static readonly AXIS_X = 0;
+    public static readonly AXIS_Y = 1;
+    public static readonly AXIS_Z = 2;
 
-    public static readonly ZERO= new Vector3(0, 0, 0);
-    public static readonly ONE= new Vector3(1, 1, 1);
-    public static readonly UP= new Vector3(0, 1, 0);
-    public static readonly DOWN= new Vector3(0, -1, 0);
-    public static readonly LEFT= new Vector3(-1, 0, 0);
-    public static readonly RIGHT= new Vector3(1, 0, 0);
-    public static readonly FORWARD= new Vector3(0, 0, 1);
-    public static readonly BACKWARD= new Vector3(0, 0, -1);
+    public static readonly ZERO = new Vector3(0, 0, 0);
+    public static readonly ONE = new Vector3(1, 1, 1);
+    public static readonly UP = new Vector3(0, 1, 0);
+    public static readonly DOWN = new Vector3(0, -1, 0);
+    public static readonly LEFT = new Vector3(-1, 0, 0);
+    public static readonly RIGHT = new Vector3(1, 0, 0);
+    public static readonly FORWARD = new Vector3(0, 0, 1);
+    public static readonly BACKWARD = new Vector3(0, 0, -1);
 
     x: number = 0;
     y: number = 0;
     z: number = 0;
 
-    constructor(x: number = 0, y: number = 0, z: number = 0) {
+    constructor(x : number = 0, y : number = 0, z : number = 0) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
     get length(){
-        return Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z)
+        return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
     }
 
     /**
@@ -31,11 +31,10 @@ export class Vector3 {
      * @param vector - vector to check equality against.
      * @returns {boolean} Equality of this and vector.
      */
-    equals(vector: Vector3): boolean {
-        let diff= this.sub(vector).abs();
-        let e= Number.EPSILON;
+    equals(vector : Vector3) : boolean {
+        let diff = this.sub(vector).abs();
         return (
-            diff.x < e && diff.y < e && diff.z < e
+            diff.x < Number.EPSILON && diff.y < Number.EPSILON && diff.z < Number.EPSILON
         );
     }
 
@@ -43,7 +42,7 @@ export class Vector3 {
      * Creates a new vector3 from this.
      * @returns Copy of vector.
      */
-    copy(): Vector3{
+    copy() : Vector3 {
         return new Vector3(this.x, this.y, this.z);
     }
 
@@ -52,7 +51,7 @@ export class Vector3 {
      * @param vector vector to add to this.
      * @returns Added vector3 of this and vector.
      */
-    add(vector: Vector3): Vector3 {
+    add(vector : Vector3) : Vector3 {
         return new Vector3(
             this.x + vector.x,
             this.y + vector.y,
@@ -65,7 +64,7 @@ export class Vector3 {
      * @param vector vector to subtract from this.
      * @returns Subtracted vector3 of this and vector.
      */
-    sub(vector: Vector3): Vector3 {
+    sub(vector : Vector3) : Vector3 {
         return new Vector3(
             this.x - vector.x,
             this.y - vector.y,
@@ -78,7 +77,7 @@ export class Vector3 {
      * @param vector vector to multiply with.
      * @returns Multiplied vector3 of this and vector.
      */
-    mult(vector: Vector3): Vector3 {
+    mult(vector : Vector3) : Vector3 {
         return new Vector3(
             this.x * vector.x,
             this.y * vector.y,
@@ -91,11 +90,11 @@ export class Vector3 {
      * @param vector vector to divide with.
      * @returns Quotient vector3 of this and vector.
      */
-    div(vector: Vector3): Vector3 {
+    div(vector : Vector3) : Vector3 {
         return new Vector3(
-            (vector.x == 0)? 0 : (this.x / vector.x),
-            (vector.y == 0)? 0 : (this.y / vector.y),
-            (vector.z == 0)? 0 : (this.z / vector.z)
+            (vector.x == 0) ? 0 : (this.x / vector.x),
+            (vector.y == 0) ? 0 : (this.y / vector.y),
+            (vector.z == 0) ? 0 : (this.z / vector.z)
         );
     }
 
@@ -104,7 +103,7 @@ export class Vector3 {
      * @param scalar
      * @returns Scales vector3.
      */
-    scale(scalar: number): Vector3 {
+    scale(scalar : number) : Vector3 {
         return new Vector3(
             this.x * scalar,
             this.y * scalar,
@@ -117,17 +116,17 @@ export class Vector3 {
      * @param vector to vector.
      * @returns distance to vector.
      */
-    distance_to(vector: Vector3): number{
+    distance_to(vector : Vector3) : number {
         return this.sub(vector).length;
     }
 
     /**
      * @returns normalized vector.
      */
-    normalize(): Vector3{
-        let m= this.length;
+    normalize() : Vector3 {
+        let m = this.length;
         if (m == 0) return new Vector3();
-        return this.scale(1/m);
+        return this.scale(1 / m);
     }
 
     /**
@@ -136,8 +135,8 @@ export class Vector3 {
      * @param t blend amount. 
      * @returns Vector t amount between this and end point.
      */
-    lerp(to: Vector3, t: number): Vector3{
-        var delta= to.sub(this);
+    lerp(to : Vector3, t : number) : Vector3 {
+        var delta = to.sub(this);
         return this.add(delta.scale(t));
     }
 
@@ -147,8 +146,8 @@ export class Vector3 {
      * @param step maximum step amount.
      * @returns vector stepped towards end point.
      */
-    move_towards(vector: Vector3, step: number): Vector3{
-        var delta= vector.sub(this);
+    move_towards(vector : Vector3, step : number) : Vector3 {
+        var delta = vector.sub(this);
         if (delta.length <= step) return new Vector3(vector.x, vector.y, vector.z);
         return this.add(delta.normalize().scale(step));
     }
@@ -158,11 +157,11 @@ export class Vector3 {
      * @param vector 
      * @returns Cross product.
      */
-    cross(vector: Vector3): Vector3{
+    cross(vector : Vector3) : Vector3 {
         return new Vector3(
-            this.y*vector.z - this.z*vector.y,
-            this.z*vector.x - this.x*vector.z,
-            this.x*vector.y - this.y*vector.x
+            this.y * vector.z - this.z * vector.y,
+            this.z * vector.x - this.x * vector.z,
+            this.x * vector.y - this.y * vector.x
         );
     }
 
@@ -171,15 +170,15 @@ export class Vector3 {
      * @param vector 
      * @returns dot product.
      */
-    dot(vector: Vector3): number{
-        return this.x*vector.x + this.y*vector.y + this.z*vector.z;
+    dot(vector : Vector3) : number {
+        return this.x * vector.x + this.y * vector.y + this.z * vector.z;
     }
 
     /**
      * Returns the vector with its absolute value as components.
      * @returns vector with absolute components.
      */
-    abs(): Vector3{
+    abs() : Vector3 {
         return new Vector3(
             Math.abs(this.x),
             Math.abs(this.y),
@@ -191,7 +190,7 @@ export class Vector3 {
      * Return the vector with its components ceiled.
      * @returns vector with ceiled components.
      */
-    ceil(): Vector3{
+    ceil() : Vector3 {
         return new Vector3(
             Math.ceil(this.x),
             Math.ceil(this.y),
@@ -203,7 +202,7 @@ export class Vector3 {
      * Returns the vector with its components floored.
      * @returns vector with floored components.
      */
-    floor(): Vector3{
+    floor() : Vector3 {
         return new Vector3(
             Math.floor(this.x),
             Math.floor(this.y),
@@ -215,7 +214,7 @@ export class Vector3 {
      * Returns the vector with its components rounded.
      * @returns vector with rounded components.
      */
-    round(): Vector3{
+    round() : Vector3 {
         return new Vector3(
             Math.round(this.x),
             Math.round(this.y),
@@ -227,7 +226,7 @@ export class Vector3 {
      * Returns the sign values of the components.
      * @returns sign values of components.
      */
-    sign(): Vector3{
+    sign() : Vector3 {
         return new Vector3(
             Math.sign(this.x),
             Math.sign(this.y),
@@ -240,7 +239,7 @@ export class Vector3 {
      * @param step 
      * @returns snapped components.
      */
-    snapped(step: Vector3): Vector3{
+    snapped(step : Vector3) : Vector3 {
         return this.div(step).floor().mult(step);
     }
 
@@ -249,7 +248,7 @@ export class Vector3 {
      * @param to destination vector. 
      * @returns directional vector.
      */
-    direction_to(to: Vector3): Vector3{
+    direction_to(to : Vector3) : Vector3 {
         return this.sub(to).normalize();
     }
 
@@ -257,7 +256,7 @@ export class Vector3 {
      * Inverses values of vector as 1/x
      * @returns inverse of vector.
      */
-    inverse(): Vector3{
+    inverse() : Vector3 {
         return Vector3.ONE.div(this);
     }
 
@@ -267,14 +266,14 @@ export class Vector3 {
      * @param axis axis constant.
      * @returns rotated vector.
      */
-    rotate(phi: number, axis: number= Vector3.AXIS_Z): Vector3{
-        phi= phi % Math.PI*2;
-        let cos= Math.cos(phi);
-        let sin= Math.sin(phi);
+    rotate(phi : number, axis : number = Vector3.AXIS_Z) : Vector3 {
+        phi = phi % Math.PI * 2;
+        let cos = Math.cos(phi);
+        let sin = Math.sin(phi);
         if (axis == Vector3.AXIS_X){
             return new Vector3(
                 this.x,
-                this.y * cos - this.z *sin,
+                this.y * cos - this.z * sin,
                 this.y * sin + this.z * cos
             );
         }
@@ -287,7 +286,7 @@ export class Vector3 {
         }
         return new Vector3(
             this.x * cos - this.y * sin,
-            this.x * sin + this.y * cos,
+            this.y * cos - this.x * sin,
             this.z
         );
     }
