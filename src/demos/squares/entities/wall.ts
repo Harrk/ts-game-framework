@@ -1,4 +1,4 @@
-import { Entity } from "../../../engine/entity";
+import { Entity } from "../../../core/entity";
 import { Rect } from "../../../types/rect";
 import { RendererInterface } from "../../../renderer/renderer-interface";
 

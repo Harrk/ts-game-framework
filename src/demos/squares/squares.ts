@@ -1,11 +1,11 @@
-import { Game } from '../../engine/game';
+import { Game } from '../../core/game';
 import constants from '../../types/constants';
 import { GameConfig } from '../../types/game-config';
-import { MainScene } from './scenes/mainScene';
+import { MainScene } from './scenes/main-scene';
 
 // Define the default game configs
 const config = new GameConfig(
-    constants.CONTEXT_WEBGL2,
+    constants.CONTEXT_CANVAS,
     640,
     360
 );

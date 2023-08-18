@@ -1,5 +1,5 @@
-import { Entity } from "../../../engine/entity";
-import { Input } from "../../../engine/systems/input";
+import { Entity } from "../../../core/entity";
+import { Input } from "../../../systems/input";
 import { Rect } from "../../../types/rect";
 import { RendererInterface } from "../../../renderer/renderer-interface";
 import { Vector2 } from "../../../types/vector2";
