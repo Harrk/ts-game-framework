@@ -1,4 +1,4 @@
 
-import SquaresDemo from "./demos/squares/squares";
+import SquaresDemo from './demos/squares/squares';
 
 SquaresDemo();

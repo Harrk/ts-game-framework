@@ -20,6 +20,13 @@ yarn run dev
 yarn run build
 ```
 
+**Code Linter**
+
+Check code changes follows the styleguide:
+```bash
+yarn lint
+```
+
 ## Todo List
 
 List will change over time as I learn more about what systems make up a game framework.

@@ -1,14 +1,13 @@
-import { RendererInterface } from "../types/renderer/renderer-interface";
-import { Entity } from "./entity";
+import { RendererInterface } from '../renderer/renderer-interface';
+import { Entity } from './entity';
 
 export class Scene {
-    is_running: boolean = false;
+    is_running: boolean = true;
     entities: Entity[] = [];
 
-    constructor(is_running: boolean = false) {
-        this.is_running = is_running;
+    constructor() {
     }
-    
+
     start() {
         this.is_running = false;
     }
@@ -30,5 +29,7 @@ export class Scene {
     addEntity(entity: Entity) {
         entity.scene = this;
         this.entities.push(entity);
+
+        entity.onReady();
     }
 }

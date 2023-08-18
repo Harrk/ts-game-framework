@@ -1,4 +1,4 @@
-import { Vector2 } from "./vector2";
+import { Vector2 } from './vector2';
 
 export class Rect {
     x: number = 0;
@@ -19,15 +19,15 @@ export class Rect {
     }
 
     overlaps(rect: Rect): boolean {
-        return this.right > rect.left
-            && this.left < rect.right
-            && this.bottom > rect.top
-            && this.top < rect.bottom;
+        return this.right > rect.left &&
+            this.left < rect.right &&
+            this.bottom > rect.top &&
+            this.top < rect.bottom;
     }
 
     pointCollides(point: Vector2): boolean {
-        return point.x > this.left && point.x < this.right
-            && point.y > this.top && point.y < this.bottom;
+        return point.x > this.left && point.x < this.right &&
+            point.y > this.top && point.y < this.bottom;
     }
 
     clone(): Rect {
