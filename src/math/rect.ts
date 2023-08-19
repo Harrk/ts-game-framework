@@ -6,8 +6,8 @@ import * as geometry from "./geometry-2d.ts";
 export default class Rect implements ShapeInterface<Rect>{
     type : "Rect" = "Rect"
     aabb: AABB;
-    position : Vector2 = Vector2.ZERO;
-    size : Vector2 = Vector2.ZERO;
+    position: Vector2 = Vector2.ZERO;
+    size: Vector2 = Vector2.ZERO;
 
     constructor(x: number = 0, y: number = 0, width: number, height: number) {
         this.aabb = new AABB(0, 0, 0, 0);
