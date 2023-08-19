@@ -1,5 +1,5 @@
 
-export interface SystemInterface {
+export default interface SystemInterface {
     name: string;
 
     update(): void;

@@ -1,6 +1,6 @@
-import { SystemInterface } from "./systemInterface";
+import SystemInterface from "./systemInterface.ts";
 
-export class Input implements SystemInterface {
+export default class Input implements SystemInterface {
     keys_pressed: string[] = [];
     keys_up: string[] = [];
     keys_down: string[] = [];

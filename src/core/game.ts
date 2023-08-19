@@ -1,10 +1,10 @@
-import { GameConfig } from '../types/game-config';
-import { Scene } from './scene';
-import { Input } from '../systems/input';
-import { Renderer } from '../systems/renderer';
-import { SystemInterface } from '../systems/systemInterface';
+import GameConfig from './game-config.ts';
+import Scene from './scene.ts';
+import Input from '../systems/input.ts';
+import Renderer from '../systems/renderer.ts';
+import SystemInterface from '../systems/systemInterface.ts';
 
-export class Game {
+export default class Game {
     target_fps: number = 100;
     timer: number;
     config: GameConfig;

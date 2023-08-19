@@ -1,7 +1,7 @@
-import { Rect } from '../types/rect';
-import { RendererInterface } from './renderer-interface';
+import Rect from '../math/rect.ts';
+import RendererInterface from './renderer-interface.ts';
 
-export class RendererWebGl implements RendererInterface {
+export default class RendererWebGl implements RendererInterface {
     gl: WebGL2RenderingContext;
     clearColor: Float32Array;
 

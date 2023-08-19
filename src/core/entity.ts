@@ -1,9 +1,9 @@
-import { Rect } from '../types/rect';
-import { RendererInterface } from '../renderer/renderer-interface';
-import { Vector2 } from '../types/vector2';
-import { Scene } from './scene';
+import Rect from '../math/rect.ts';
+import RendererInterface from '../renderer/renderer-interface.ts';
+import Vector2 from '../math/vector2.ts';
+import Scene from './scene.ts';
 
-export abstract class Entity {
+export default abstract class Entity {
     position: Vector2;
     collision_rect: Rect;
     scene: Scene;

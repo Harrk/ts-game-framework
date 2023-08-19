@@ -1,11 +1,11 @@
-import { Renderer2D } from "../renderer/renderer-2d";
-import { RendererInterface } from "../renderer/renderer-interface";
-import { SystemInterface } from "./systemInterface";
-import constants from '../types/constants';
-import { Game } from "../core/game";
-import { RendererWebGl } from "../renderer/renderer-webgl";
+import Renderer2D from "../renderer/renderer-2d.ts";
+import RendererInterface from "../renderer/renderer-interface.ts";
+import SystemInterface from "./systemInterface.ts";
+import constants from '../core/constants.ts';
+import Game from "../core/game.ts";
+import RendererWebGl from "../renderer/renderer-webgl.ts";
 
-export class Renderer implements SystemInterface {
+export default class Renderer implements SystemInterface {
     canvas: HTMLCanvasElement;
     renderer: RendererInterface;
     game: Game;
