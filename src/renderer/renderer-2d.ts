@@ -14,6 +14,6 @@ export default class Renderer2D implements RendererInterface {
 
     drawRect(rect: Rect, colour: string = 'white'): void {
         this.context.fillStyle = colour;
-        this.context.fillRect(rect.x, rect.y, rect.width, rect.height);
+        this.context.fillRect(rect.position.x, rect.position.y, rect.width, rect.height);
     }
 }
