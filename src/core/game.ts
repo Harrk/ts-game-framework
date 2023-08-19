@@ -24,7 +24,7 @@ export default class Game {
 
     public getSystem<T extends SystemInterface>(system: String): T {
         return this.systems.find((sys) => {
-            return sys.name === system
+            return sys.name === system;
         }) as T;
     }
 
@@ -43,7 +43,7 @@ export default class Game {
 
     update(): void {
         // Update systems
-        this.systems.forEach((sys) => sys.update())
-        this.systems.forEach((sys) => sys.postUpdate())
+        this.systems.forEach((sys) => sys.update());
+        this.systems.forEach((sys) => sys.postUpdate());
     }
 }

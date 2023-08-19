@@ -1,4 +1,4 @@
-import Vector2 from "./vector2.ts";
+import Vector2 from './vector2.ts';
 
 export class Line {
     start : Vector2 = Vector2.ZERO;
@@ -10,7 +10,7 @@ export class Line {
         this.end.x = x2;
         this.end.y = y2;
     }
-    
+
     clone() : Line {
         return new Line(
             this.start.x,
@@ -24,7 +24,6 @@ export class Line {
         this.start.x = pos.x;
         this.start.y = pos.y;
     }
-
 
     setEnd(pos : Vector2) : void {
         this.end.x = pos.x;

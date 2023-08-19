@@ -1,15 +1,15 @@
-import Renderer2D from "../renderer/renderer-2d.ts";
-import RendererInterface from "../renderer/renderer-interface.ts";
-import SystemInterface from "./systemInterface.ts";
+import Renderer2D from '../renderer/renderer-2d.ts';
+import RendererInterface from '../renderer/renderer-interface.ts';
+import SystemInterface from './systemInterface.ts';
 import constants from '../core/constants.ts';
-import Game from "../core/game.ts";
-import RendererWebGl from "../renderer/renderer-webgl.ts";
+import Game from '../core/game.ts';
+import RendererWebGl from '../renderer/renderer-webgl.ts';
 
 export default class Renderer implements SystemInterface {
     canvas: HTMLCanvasElement;
     renderer: RendererInterface;
     game: Game;
-    name: string = "Renderer";
+    name: string = 'Renderer';
 
     constructor(game: Game) {
         this.game = game;
@@ -40,7 +40,7 @@ export default class Renderer implements SystemInterface {
      * WEBGL2: Use the webgl2 renderer
      * 2D: Use the 2d renderer
      */
-     private createRenderer() {
+    private createRenderer() {
         if (this.game.config.type === constants.CONTEXT_AUTO) {
             // Todo: Not yet supported
             // if (this.canvas.getContext('webgl')) {
@@ -69,7 +69,7 @@ export default class Renderer implements SystemInterface {
             this.renderer = new RendererWebGl(this.canvas.getContext('webgl2'));
         }
 
-        if (! this.renderer) {
+        if (!this.renderer) {
             throw new Error('Renderer not supported');
         }
     }

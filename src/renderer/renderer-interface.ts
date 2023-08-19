@@ -4,4 +4,4 @@ export default interface RendererInterface {
     clear(): void;
 
     drawRect(rect: Rect, colour?: string): void;
-}
+};

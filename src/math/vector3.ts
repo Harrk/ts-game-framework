@@ -22,8 +22,8 @@ export default class Vector3 {
         this.z = z;
     }
 
-    get length(){
-        return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
+    get length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     }
 
     /**
@@ -32,7 +32,7 @@ export default class Vector3 {
      * @returns {boolean} Equality of this and vector.
      */
     equals(vector : Vector3) : boolean {
-        let diff = this.sub(vector).abs();
+        const diff = this.sub(vector).abs();
         return (
             diff.x < Number.EPSILON && diff.y < Number.EPSILON && diff.z < Number.EPSILON
         );
@@ -124,7 +124,7 @@ export default class Vector3 {
      * @returns normalized vector.
      */
     normalize() : Vector3 {
-        let m = this.length;
+        const m = this.length;
         if (m == 0) return new Vector3();
         return this.scale(1 / m);
     }
@@ -132,29 +132,29 @@ export default class Vector3 {
     /**
      * Returns the linear interpolation between this and to.
      * @param to vector end point.
-     * @param t blend amount. 
+     * @param t blend amount.
      * @returns Vector t amount between this and end point.
      */
     lerp(to : Vector3, t : number) : Vector3 {
-        var delta = to.sub(this);
+        const delta = to.sub(this);
         return this.add(delta.scale(t));
     }
 
     /**
      * Steps toward destination vector.
-     * @param vector vector end point. 
+     * @param vector vector end point.
      * @param step maximum step amount.
      * @returns vector stepped towards end point.
      */
     move_towards(vector : Vector3, step : number) : Vector3 {
-        var delta = vector.sub(this);
+        const delta = vector.sub(this);
         if (delta.length <= step) return new Vector3(vector.x, vector.y, vector.z);
         return this.add(delta.normalize().scale(step));
     }
 
     /**
      * Returns cross product of this and given vector.
-     * @param vector 
+     * @param vector
      * @returns Cross product.
      */
     cross(vector : Vector3) : Vector3 {
@@ -167,7 +167,7 @@ export default class Vector3 {
 
     /**
      * Returns dot product of this and given vector.
-     * @param vector 
+     * @param vector
      * @returns dot product.
      */
     dot(vector : Vector3) : number {
@@ -236,7 +236,7 @@ export default class Vector3 {
 
     /**
      * Snaps the vector to the increments of step vector.
-     * @param step 
+     * @param step
      * @returns snapped components.
      */
     snapped(step : Vector3) : Vector3 {
@@ -245,7 +245,7 @@ export default class Vector3 {
 
     /**
      * Returns the directional vector from this to to.
-     * @param to destination vector. 
+     * @param to destination vector.
      * @returns directional vector.
      */
     direction_to(to : Vector3) : Vector3 {
@@ -268,16 +268,16 @@ export default class Vector3 {
      */
     rotate(phi : number, axis : number = Vector3.AXIS_Z) : Vector3 {
         phi = phi % Math.PI * 2;
-        let cos = Math.cos(phi);
-        let sin = Math.sin(phi);
-        if (axis == Vector3.AXIS_X){
+        const cos = Math.cos(phi);
+        const sin = Math.sin(phi);
+        if (axis == Vector3.AXIS_X) {
             return new Vector3(
                 this.x,
                 this.y * cos - this.z * sin,
                 this.y * sin + this.z * cos
             );
         }
-        if (axis == Vector3.AXIS_Y){
+        if (axis == Vector3.AXIS_Y) {
             return new Vector3(
                 this.x * cos + this.z * sin,
                 this.y,
@@ -290,5 +290,4 @@ export default class Vector3 {
             this.z
         );
     }
-
 }

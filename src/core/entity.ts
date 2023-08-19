@@ -47,19 +47,19 @@ export default abstract class Entity {
     }
 
     moveAndCollide(position: Vector2) {
-        if (! this.testCollision(this.position.add(position))) {
+        if (!this.testCollision(this.position.add(position))) {
             this.position = this.position.add(position);
         }
     }
 
     moveAndSlide(position: Vector2) {
-        let xVec = this.position.add(new Vector2(position.x , 0));
-        if (! this.testCollision(xVec)) {
+        const xVec = this.position.add(new Vector2(position.x, 0));
+        if (!this.testCollision(xVec)) {
             this.position = xVec;
         }
 
-        let yVec = this.position.add(new Vector2(0 , position.y));
-        if (! this.testCollision(yVec)) {
+        const yVec = this.position.add(new Vector2(0, position.y));
+        if (!this.testCollision(yVec)) {
             this.position = yVec;
         }
     }
