@@ -1,21 +1,43 @@
 import { Vector2 } from './vector2';
+import { AABB, ShapeInterface } from "./shapes/shape";
 
-export class Rect {
-    x: number = 0;
-    y: number = 0;
-    width: number = 0;
-    height: number = 0;
+export class Rect implements ShapeInterface<Rect>{
+    position : Vector2;
+    size : Vector2;
 
     constructor(x: number = 0, y: number = 0, width: number, height: number) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.position = new Vector2(x, y);
+        this.size = new Vector2(width, height);
+        this._updateAABB();
     }
 
-    setPosition(pos: Vector2): void {
-        this.x = pos.x;
-        this.y = pos.y;
+    //#region collision functions
+    collides(shape: Rect): boolean {
+        return (
+            this.right > shape.left &&
+            this.left < shape.right &&
+            this.bottom > shape.top &&
+            this.top < shape.bottom
+        );
+    }
+    //#endregion
+
+    aabb: AABB;
+    _updateAABB(): void {
+        this.aabb.x1 = this.left;
+        this.aabb.y1 = this.top;
+        this.aabb.x2 = this.right;
+        this.aabb.y2 = this.bottom;
+    }
+
+    setPosition(pos : Vector2) : void {
+        this.position = pos;
+        this._updateAABB();
+    }
+
+    move(delta: Vector2): void {
+        this.position = this.position.add(delta);
+        this._updateAABB();
     }
 
     overlaps(rect: Rect): boolean {
@@ -25,34 +47,42 @@ export class Rect {
             this.top < rect.bottom;
     }
 
-    pointCollides(point: Vector2): boolean {
+    hasPoint(point: Vector2): boolean {
         return point.x > this.left && point.x < this.right &&
             point.y > this.top && point.y < this.bottom;
     }
 
     clone(): Rect {
         return new Rect(
-            this.x,
-            this.y,
-            this.width,
-            this.height
+            this.position.x,
+            this.position.y,
+            this.size.x,
+            this.size.y
         );
     }
 
+    get width() : number {
+        return this.size.x;
+    }
+
+    get height() : number {
+        return this.size.y;
+    }
+
     get left(): number {
-        return this.x;
+        return this.position.x;
     }
 
     get right(): number {
-        return this.x + this.width;
+        return this.position.x + this.size.x;
     }
 
     get top(): number {
-        return this.y;
+        return this.position.y;
     }
 
     get bottom(): number {
-        return this.y + this.height;
+        return this.position.y + this.size.y;
     }
 
     get topLeft(): Vector2 {
@@ -72,11 +102,11 @@ export class Rect {
     }
 
     get centerX(): number {
-        return this.x + (this.width / 2);
+        return this.position.x + (this.size.x / 2);
     }
 
     get centerY(): number {
-        return this.y + (this.height / 2);
+        return this.position.y + (this.size.y / 2);
     }
 
     get center(): Vector2 {
