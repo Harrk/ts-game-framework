@@ -1,7 +1,7 @@
-import { Vector2 } from "./vector2";
-import { AABB, ShapeInterface } from "./shapes/shape";
+import Vector2 from "./vector2.ts";
+import {AABB, ShapeInterface} from "./shape.ts";
 
-export class Line implements ShapeInterface<Line>{
+export default class Line implements ShapeInterface<Line>{
     position : Vector2;
     end : Vector2 = Vector2.ZERO;
 

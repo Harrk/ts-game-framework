@@ -1,7 +1,7 @@
-import { Vector2 } from './vector2';
-import { AABB, ShapeInterface } from "./shapes/shape";
+import Vector2 from './vector2.ts';
+import { AABB, ShapeInterface } from "./shape.ts";
 
-export class Rect implements ShapeInterface<Rect>{
+export default class Rect implements ShapeInterface<Rect>{
     position : Vector2;
     size : Vector2;
 
