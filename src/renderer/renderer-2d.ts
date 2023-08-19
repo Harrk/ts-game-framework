@@ -1,7 +1,7 @@
-import { Rect } from '../types/rect';
-import { RendererInterface } from './renderer-interface';
+import Rect from '../math/rect.ts';
+import RendererInterface from './renderer-interface.ts';
 
-export class Renderer2D implements RendererInterface {
+export default class Renderer2D implements RendererInterface {
     context: CanvasRenderingContext2D;
 
     constructor(context: CanvasRenderingContext2D) {

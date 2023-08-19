@@ -1,6 +1,6 @@
-import constants from './constants';
+import constants from './constants.ts';
 
-export class GameConfig {
+export default class GameConfig {
     type = constants.CONTEXT_AUTO;
     width = 640;
     height = 480;

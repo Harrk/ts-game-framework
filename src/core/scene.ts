@@ -1,7 +1,7 @@
-import { RendererInterface } from '../renderer/renderer-interface';
-import { Entity } from './entity';
+import RendererInterface from '../renderer/renderer-interface.ts';
+import Entity from './entity.ts';
 
-export class Scene {
+export default class Scene {
     is_running: boolean = true;
     entities: Entity[] = [];
 

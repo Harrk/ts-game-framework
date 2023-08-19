@@ -1,10 +1,10 @@
-import { GameConfig } from '../types/game-config';
-import { Scene } from './scene';
-import { Input } from './systems/input';
-import { Renderer } from './systems/renderer';
-import { SystemInterface } from './systems/systemInterface';
+import GameConfig from './game-config.ts';
+import Scene from './scene.ts';
+import Input from '../systems/input.ts';
+import Renderer from '../systems/renderer.ts';
+import SystemInterface from '../systems/systemInterface.ts';
 
-export class Game {
+export default class Game {
     target_fps: number = 100;
     timer: number;
     config: GameConfig;
@@ -24,7 +24,7 @@ export class Game {
 
     public getSystem<T extends SystemInterface>(system: String): T {
         return this.systems.find((sys) => {
-            return sys.name === system
+            return sys.name === system;
         }) as T;
     }
 
@@ -43,7 +43,7 @@ export class Game {
 
     update(): void {
         // Update systems
-        this.systems.forEach((sys) => sys.update())
-        this.systems.forEach((sys) => sys.postUpdate())
+        this.systems.forEach((sys) => sys.update());
+        this.systems.forEach((sys) => sys.postUpdate());
     }
 }

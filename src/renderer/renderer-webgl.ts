@@ -1,7 +1,7 @@
-import { Rect } from '../types/rect';
-import { RendererInterface } from './renderer-interface';
+import Rect from '../math/rect.ts';
+import RendererInterface from './renderer-interface.ts';
 
-export class RendererWebGl implements RendererInterface {
+export default class RendererWebGl implements RendererInterface {
     gl: WebGL2RenderingContext;
     clearColor: Float32Array;
 
@@ -13,14 +13,14 @@ export class RendererWebGl implements RendererInterface {
 
     clear(): void {
         this.gl.clearColor(
-            this.clearColor[0], 
+            this.clearColor[0],
             this.clearColor[1],
             this.clearColor[2],
-            this.clearColor[3],
+            this.clearColor[3]
         );
     }
 
     drawRect(rect: Rect, colour: string = 'white'): void {
         // Todo
     }
-}
+};

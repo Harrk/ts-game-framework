@@ -1,6 +1,6 @@
-import { Vector3 } from './vector3';
+import Vector3 from './vector3.ts';
 
-export class Vector2 extends Vector3 {
+export default class Vector2 extends Vector3 {
     constructor(x: number = 0, y: number = 0) {
         super(x, y, 0);
     }
