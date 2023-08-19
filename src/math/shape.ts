@@ -1,6 +1,7 @@
 import Vector2 from "./vector2.ts";
 
 export interface ShapeInterface<T> {
+    type : "Rect" | "Line"
     aabb : AABB;
     position : Vector2;
 
@@ -13,7 +14,7 @@ export interface ShapeInterface<T> {
     move(delta : Vector2) : void;
     hasPoint(point : Vector2) : boolean;
 
-    collides(shape : T) : boolean;
+    collides(shape : ShapeInterface<any>) : boolean;
 }
 
 export class AABB {

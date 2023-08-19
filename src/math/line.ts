@@ -1,30 +1,47 @@
 import Vector2 from "./vector2.ts";
+import Rect from "./rect.ts"
 import {AABB, ShapeInterface} from "./shape.ts";
+import * as geometry from "./geometry-2d.ts";
 
 export default class Line implements ShapeInterface<Line>{
+    type: "Line" = "Line";
+    aabb: AABB;
     position : Vector2;
-    end : Vector2 = Vector2.ZERO;
+    end : Vector2;
 
     /** @alias position */
     get start() : Vector2 {return this.position;}
     set start(value : Vector2){this.position = value;}
 
     constructor(x1 : number = 0, y1 : number = 0, x2 : number = 0, y2 : number = 0) {
-        this.start.x = x1;
-        this.start.y = y1;
-        this.end.x = x2;
-        this.end.y = y2;
+        this.position = new Vector2(x1, y1);
+        this.end = new Vector2(x2, y2);
+        this.aabb = new AABB(0, 0, 0, 0);
+        this._updateAABB();
     }
 
-    //#region collision functions
-    collides(shape: Line): boolean {
-        let a = ((shape.end.x - shape.position.x) * (this.position.y - shape.position.y) - (shape.end.y - shape.position.y) * (this.position.x - shape.position.x)) / ((shape.end.y - shape.position.y) * (this.end.x - this.position.x) - (shape.end.x - shape.position.x) * (this.end.y - this.position.y));
-        let b = ((this.end.x - this.position.x) * (this.position.y - shape.position.y) - (this.end.y - this.position.y) * (this.position.x - shape.position.x)) / ((shape.end.y - shape.position.y) * (this.end.x - this.position.x) - (shape.end.x - shape.position.x) * (this.end.y - this.position.y));
-        return (a >= 0 && a <= 1 && b >= 0 && b <= 1);
+    collides(shape : Line) : boolean;
+    collides(shape : Rect) : boolean;
+    collides(shape : ShapeInterface<any>) : boolean{
+        switch (shape.type){
+            case "Line":{
+                return geometry.collision_line_line(
+                    this.position.x, this.position.y, this.end.x, this.end.y,
+                    shape.position.x, shape.position.y, (shape as Line).end.x, (shape as Line).end.y
+                );
+            }
+            case "Rect":{
+                return geometry.collision_line_rect(
+                    this.position.x, this.position.y, this.end.x, this.end.y,
+                    (shape as Rect).left, (shape as Rect).top, (shape as Rect).right, (shape as Rect).bottom
+                );
+            }
+            default:{
+                throw new Error(`Collision type <${this.type},${shape.type}> unimplemented`);
+            }
+        }
     }
-    //#endregion
 
-    aabb: AABB;
     _updateAABB(): void {
         this.aabb.x1 = Math.min(this.position.x, this.end.x);
         this.aabb.y1 = Math.min(this.position.y, this.end.y);

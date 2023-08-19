@@ -1,28 +1,45 @@
 import Vector2 from './vector2.ts';
+import Line from './line.ts';
 import { AABB, ShapeInterface } from "./shape.ts";
+import * as geometry from "./geometry-2d.ts";
 
 export default class Rect implements ShapeInterface<Rect>{
-    position : Vector2;
-    size : Vector2;
+    type : "Rect" = "Rect"
+    aabb: AABB;
+    position : Vector2 = Vector2.ZERO;
+    size : Vector2 = Vector2.ZERO;
 
     constructor(x: number = 0, y: number = 0, width: number, height: number) {
+        this.aabb = new AABB(0, 0, 0, 0);
         this.position = new Vector2(x, y);
         this.size = new Vector2(width, height);
         this._updateAABB();
     }
 
     //#region collision functions
-    collides(shape: Rect): boolean {
-        return (
-            this.right > shape.left &&
-            this.left < shape.right &&
-            this.bottom > shape.top &&
-            this.top < shape.bottom
-        );
+    collides(shape : Line) : boolean;
+    collides(shape : Rect) : boolean;
+    collides(shape : ShapeInterface<any>) : boolean{
+        switch (shape.type){
+            case "Line":{
+                return geometry.collision_line_rect(
+                    shape.position.x, shape.position.y, (shape as Line).end.x, (shape as Line).end.y,
+                    this.left, this.top, this.right, this.bottom
+                );
+            }
+            case "Rect":{
+                return geometry.collision_rect_rect(
+                    this.left, this.top, this.right, this.bottom,
+                    (shape as Rect).left, (shape as Rect).top, (shape as Rect).right, (shape as Rect).bottom
+                );
+            }
+            default:{
+                throw new Error(`Collision type <${this.type},${shape.type}> unimplemented`);
+            }
+        }
     }
     //#endregion
 
-    aabb: AABB;
     _updateAABB(): void {
         this.aabb.x1 = this.left;
         this.aabb.y1 = this.top;
