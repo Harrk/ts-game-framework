@@ -1,4 +1,5 @@
 import Rect from '../math/rect.ts';
+import Vector2 from '../math/vector2.ts';
 import RendererInterface from './renderer-interface.ts';
 
 export default class RendererWebGl implements RendererInterface {
@@ -20,7 +21,11 @@ export default class RendererWebGl implements RendererInterface {
         );
     }
 
-    drawRect(rect: Rect, colour: string = 'white'): void {
+    drawRect(rect: Rect, colour: string = 'black'): void {
+        // Todo
+    }
+
+    drawLine(from: Vector2, to: Vector2, lineWidth: number = 1, colour: string = 'black'): void {
         // Todo
     }
 };
