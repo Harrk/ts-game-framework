@@ -35,4 +35,10 @@ export default class Renderer2D implements RendererInterface {
         this.context.arc(position.x, position.y, radius, 0, 2 * Math.PI);
         this.context.stroke();
     }
+
+    drawText(position: Vector2, text: string, colour: string = this.defaultColour, size: number = 24): void {
+        this.context.fillStyle = colour;
+        this.context.font = `${ size }px sans-serif`;
+        this.context.fillText(text, position.x, position.y);
+    }
 }
