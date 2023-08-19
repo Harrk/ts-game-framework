@@ -6,8 +6,8 @@ import * as geometry from "./geometry-2d.ts";
 export default class Line implements ShapeInterface<Line>{
     type: "Line" = "Line";
     aabb: AABB;
-    position : Vector2;
-    end : Vector2;
+    position: Vector2;
+    end: Vector2;
 
     /** @alias position */
     get start() : Vector2 {return this.position;}
