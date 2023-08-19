@@ -10,6 +10,9 @@ Not fit for use in any way: I do not know what I am doing, as this is an excuse 
 $ yarn add https://github.com/Harrk/ts-game-framework
 ```
 
+### Demos
+[Squares](https://github.com/Harrk/tsgfw-square-demo)
+
 ## Package Development
 **Install Packages**
 ```bash
