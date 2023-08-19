@@ -27,4 +27,12 @@ export default class Renderer2D implements RendererInterface {
         this.context.lineWidth = lineWidth;
         this.context.stroke();
     }
+
+    drawCircle(position: Vector2, radius: number, lineWidth: number = 1, colour: string = this.defaultColour): void {
+        this.context.strokeStyle = colour;
+        this.context.lineWidth = lineWidth;
+        this.context.beginPath();
+        this.context.arc(position.x, position.y, radius, 0, 2 * Math.PI);
+        this.context.stroke();
+    }
 }
