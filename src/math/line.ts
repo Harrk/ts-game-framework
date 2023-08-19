@@ -1,6 +1,6 @@
 import Vector2 from './vector2.ts';
 
-export class Line {
+export default class Line {
     start : Vector2 = Vector2.ZERO;
     end : Vector2 = Vector2.ZERO;
 
