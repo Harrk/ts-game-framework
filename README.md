@@ -1,10 +1,16 @@
 # Typescript Game Framework
 
-A work in progress game framework written in Typescript. Not fit for use in any way. Merely an educational project for myself to sharpen my Typescript.
+A work in progress game framework written in Typescript. 
+Not fit for use in any way: I do not know what I am doing, as this is an excuse to familiarise myself with Typescript.
 
 **Structure/names of classes are likely to change whilst in development.**
 
-## Setting Up
+## Using the Package
+```bash
+$ yarn add https://github.com/Harrk/ts-game-framework
+```
+
+## Package Development
 **Install Packages**
 ```bash
 $ yarn
