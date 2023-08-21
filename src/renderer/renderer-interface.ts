@@ -7,4 +7,8 @@ export default interface RendererInterface {
     drawRect(rect: Rect, colour?: string): void;
 
     drawLine(from: Vector2, to: Vector2, lineWidth?: number, colour?: string): void;
+
+    drawCircle(position: Vector2, radius: number, lineWidth?: number, colour?: string): void;
+
+    drawText(position: Vector2, text: string, colour?: string, size?: number): void;
 };

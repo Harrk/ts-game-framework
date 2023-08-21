@@ -28,4 +28,12 @@ export default class RendererWebGl implements RendererInterface {
     drawLine(from: Vector2, to: Vector2, lineWidth: number = 1, colour: string = 'black'): void {
         // Todo
     }
+
+    drawCircle(position: Vector2, radius: number, lineWidth: number = 1, colour: string = 'black'): void {
+        // Todo
+    }
+
+    drawText(position: Vector2, text: string, colour: string = 'black', size: number = 24): void {
+        // Todo? This doesn't make sense, perhaps move this into a dedicated UI layer instead?
+    }
 };
